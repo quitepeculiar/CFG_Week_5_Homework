@@ -11,111 +11,23 @@ import requests
 
 pokemon_list = [83, 94, 79, 52, 151, 289]
 
-# Pokémon 1
-url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(pokemon_list[0])
-
-response = requests.get(url)
-print(response)
-
-pokemon = response.json()
-print(pokemon["name"])
-moves = pokemon["moves"]
+def pokemon_moves(pokemon_id, f):
+    global url, response, pokemon, moves, move
+    url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(pokemon_id)
+    response = requests.get(url)
+    pokemon = response.json()
+    print(pokemon["name"].title())
+    moves = pokemon["moves"]
+    f.write(pokemon["name"].title() + "\n")
+    for move in moves:
+        f.write("\t" + move["move"]["name"].title() + "\n")
 
 f = open("pokemon.txt", "w+")
-f.write(pokemon["name"] + " ")
-for move in moves:
-    f.write("""
-    """ + move["move"]["name"])
-f.close()
+f.write("Check out my smooth moves! \n")
 
-# Pokémon 2
-url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(pokemon_list[1])
+for pokemon in pokemon_list:
+    pokemon_moves(pokemon, f)
 
-response = requests.get(url)
-print(response)
-
-pokemon = response.json()
-print(pokemon["name"])
-moves = pokemon["moves"]
-
-f = open("pokemon.txt", "a+")
-f.write("""
-""" + pokemon["name"])
-for move in moves:
-    f.write("""
-    """ + move["move"]["name"])
-f.close()
-
-# Pokémon 3
-url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(pokemon_list[2])
-
-response = requests.get(url)
-print(response)
-
-pokemon = response.json()
-print(pokemon["name"])
-moves = pokemon["moves"]
-
-f = open("pokemon.txt", "a+")
-f.write("""
-""" + pokemon["name"])
-for move in moves:
-    f.write("""
-    """ + move["move"]["name"])
-f.close()
-
-# Pokémon 4
-url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(pokemon_list[3])
-
-response = requests.get(url)
-print(response)
-
-pokemon = response.json()
-print(pokemon["name"])
-moves = pokemon["moves"]
-
-f = open("pokemon.txt", "a+")
-f.write("""
-""" + pokemon["name"])
-for move in moves:
-    f.write("""
-    """ + move["move"]["name"])
-f.close()
-
-# Pokémon 5
-url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(pokemon_list[4])
-
-response = requests.get(url)
-print(response)
-
-pokemon = response.json()
-print(pokemon["name"])
-moves = pokemon["moves"]
-
-f = open("pokemon.txt", "a+")
-f.write("""
-""" + pokemon["name"])
-for move in moves:
-    f.write("""
-    """ + move["move"]["name"])
-f.close()
-
-# Pokémon 6
-url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(pokemon_list[5])
-
-response = requests.get(url)
-print(response)
-
-pokemon = response.json()
-print(pokemon["name"])
-moves = pokemon["moves"]
-
-f = open("pokemon.txt", "a+")
-f.write("""
-""" + pokemon["name"])
-for move in moves:
-    f.write("""
-    """ + move["move"]["name"])
 f.close()
 
 print("Gotta catch 'em all!")
